@@ -13,6 +13,7 @@ import sqlite3
 import string
 import subprocess
 import sys
+import datetime
 import time
 import datetime
 import httplib
@@ -20,7 +21,7 @@ import fnmatch
 
 import requests
 
-GRAFANA_DB_DIR   = sys.argv[1] if len(sys.argv) > 1 else '/var/lib/grafana'
+GRAFANA_DB_DIR   = sys.argv[1] if len(sys.argv) > 1 else '/srv/grafana'
 GRAFANA_IMG_DR   = '/usr/share/grafana/public/img/'
 SCRIPT_DIR       = os.path.dirname(os.path.abspath(__file__))
 DASHBOARD_DIR    = SCRIPT_DIR + '/dashboards/'
@@ -28,8 +29,9 @@ NEW_VERSION_FILE = SCRIPT_DIR + '/VERSION'
 OLD_VERSION_FILE = GRAFANA_DB_DIR + '/PERCONA_DASHBOARDS_VERSION'
 HOST             = 'http://127.0.0.1:3000'
 LOGO_FILE        = '/usr/share/pmm-server/landing-page/img/pmm-logo.svg'
-SET_OF_TAGS 	 = {'QAN': 0, 'OS': 0, 'MySQL': 0, 'MongoDB': 0, 'PostgreSQL': 0, 'HA': 0, 'Cloud': 0, 'Insight': 0, 'PMM': 0}
+SET_OF_TAGS      = {'QAN': 0, 'OS': 0, 'MySQL': 0, 'MongoDB': 0, 'PostgreSQL': 0, 'HA': 0, 'Cloud': 0, 'Insight': 0, 'PMM': 0}
 YEAR             = str(datetime.date.today())[:4]
+
 CONTENT          = '''<center>
 <p>MySQL and InnoDB are trademarks of Oracle Corp. Proudly running Percona Server. Copyright (c) 2006-'''+YEAR+''' Percona LLC.</p>
 <div style='text-align:center;'>
